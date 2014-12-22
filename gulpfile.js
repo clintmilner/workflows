@@ -10,6 +10,7 @@ var gulp = require( 'gulp' ),
     connect = require( 'gulp-connect' ),
     gulpIf = require( 'gulp-if' ),
     uglify = require( 'gulp-uglify' ),
+    minifyHtml = require( 'gulp-minify-html' ),
     concat = require( 'gulp-concat' );
 
 var env, htmlSources, jsonSources, coffeeSources, jsSources, sassSources, outputDir, sassStyle;
@@ -76,12 +77,14 @@ gulp.task( 'json', function(){
 });
 
 gulp.task( 'html', function(){
-    gulp.src( htmlSources )
+    gulp.src( 'builds/development/*.html' )
+        .pipe( gulpIf( env === 'production', minifyHtml() ) )
+        .pipe( gulpIf( env === 'production', gulp.dest( outputDir ) ) )
         .pipe( connect.reload() )
 });
 
 gulp.task( 'watch', function(){
-   gulp.watch( htmlSources, [ 'html' ] );
+   gulp.watch( 'builds/development/*.html', [ 'html' ] );
    gulp.watch( jsonSources, [ 'json' ] );
    gulp.watch( coffeeSources, [ 'coffee' ] );
    gulp.watch( jsSources, [ 'js' ] );
