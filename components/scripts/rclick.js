@@ -4,7 +4,7 @@
 
 var rclick = function ()
 {
-    var myNodes = document.querySelectorAll( ".rclick" );
+    var myNodes = document.querySelectorAll( '.rclick' );
 
     for ( var i = 0; i < myNodes.length; i++ )
     {

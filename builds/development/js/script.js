@@ -5,7 +5,7 @@
 
 var rclick = function ()
 {
-    var myNodes = document.querySelectorAll( ".rclick" );
+    var myNodes = document.querySelectorAll( '.rclick' );
 
     for ( var i = 0; i < myNodes.length; i++ )
     {
@@ -103,7 +103,7 @@ $ = require('jquery');
 
 (fill = function(item) {
   return $('.tagline').append("" + item);
-})('The most creative minds in Art');
+})('The most creative minds in Fart');
 
 fill;
 
