@@ -9,6 +9,9 @@ var gulp = require( 'gulp' ),
     connect = require( 'gulp-connect' ),
     concat = require( 'gulp-concat' );
 
+var htmlSources = [ 'builds/development/*.html' ];
+var jsonSources = [ 'builds/development/js/*.json' ];
+
 var coffeeSources = [ 'components/coffee/tagline.coffee' ];
 var jsSources = [
     'components/scripts/rclick.js',
@@ -48,8 +51,19 @@ gulp.task( 'compass', function(){
         .pipe( connect.reload() )
 });
 
+gulp.task( 'json', function(){
+    gulp.src( jsonSources )
+        .pipe( connect.reload() )
+});
+
+gulp.task( 'html', function(){
+    gulp.src( htmlSources )
+        .pipe( connect.reload() )
+});
 
 gulp.task( 'watch', function(){
+   gulp.watch( htmlSources, [ 'html' ] );
+   gulp.watch( jsonSources, [ 'json' ] );
    gulp.watch( coffeeSources, [ 'coffee' ] );
    gulp.watch( jsSources, [ 'js' ] );
    gulp.watch( 'components/sass/*.scss', [ 'compass' ] );
@@ -63,4 +77,4 @@ gulp.task( 'connect', function(){
 });
 
 
-gulp.task( 'default', [ 'coffee', 'js', 'compass', 'connect', 'watch' ] );
+gulp.task( 'default', [ 'html', 'json', 'coffee', 'js', 'compass', 'connect', 'watch' ] );
